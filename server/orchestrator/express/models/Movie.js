@@ -6,90 +6,69 @@ const axios = require('axios')
 class MovieModel {
   static async findAll() {
     let dataMovies = await redis.get('movies')
-    if(dataMovies){
-      return JSON.parse(dataMovies)
-    }
-    else{
-      return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3001/movies')
-        .then( async (resp) => {
-          await redis.set('movies',JSON.stringify(resp.data))
-          resolve(resp.data)
-        })
-        .catch((err) => {
-          reject(err)
-        })
-      })
+    if(dataMovies) return JSON.parse(dataMovies)
+    try {
+      const movies = await axios.get('http://localhost:3001/movies')
+      await redis.set('movies',JSON.stringify(movies.data))
+      return movies.data
+    } catch (err) {
+      return err
     }
   }
 
   static async findOne(movieId) {
     let dataMovie = await redis.get(`movie-${movieId}`)
-    if(dataMovie) {
-      return JSON.parse(dataMovie)
+    if(dataMovie) return JSON.parse(dataMovie)
+    try {
+      const movie = await axios.get(`http://localhost:3001/movies/${movieId}`)
+      await redis.set(`movie-${movieId}`,JSON.stringify(movie.data))
+      return movie.data
     }
-    else{
-      return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:3001/movies/${movieId}`)
-        .then( async (resp) => {
-          await redis.set(`movie-${movieId}`,JSON.stringify(resp.data))
-          resolve(resp.data)
-        })
-        .catch((err) => {
-          reject(err)
-        })
-      })
+    catch(err) {
+      return err
     }
   }
 
-  static addNewMovie(newMovie) {
-    return new Promise((resolve, reject) => {
-      axios({
+  static async addNewMovie(newMovie) {
+    try {
+      const newMovie = await axios({
         method: 'post',
         url: 'http://localhost:3001/movies',
         data: newMovie
       })
-      .then( async (resp) => {
-        await redis.del('movies')
-        resolve(resp.data)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-    })
+      await redis.del('movies')
+      return newMovie.data
+    }
+    catch(err) {
+      return err
+    }
   }
 
-  static updateNewMovie(idMovie, newUpdatedMovie) {
-    return new Promise((resolve, reject) => {
-      axios({
+  static async updateNewMovie(idMovie, newUpdatedMovie) {
+    try {
+      const updatedMovie = await axios({
         method: 'put',
         url: `http://localhost:3001/movies/${idMovie}`,
         data: newUpdatedMovie
       })
-      .then( async (resp) => {
-        await redis.del('movies')
-        resolve(resp.data)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-    })
+      await redis.del('movies')
+      return updatedMovie.data
+    } catch (err) {
+      return err
+    }
   }
 
-  static deleteOneMovie(idMovie) {
-    return new Promise((resolve, reject) => {
-      axios({
+  static async deleteOneMovie(idMovie) {
+    try {
+      const deletedMovie = await axios({
         method: 'delete',
         url: `http://localhost:3001/movies/${idMovie}`,
       })
-      .then( async (resp) => {
-        await redis.del('movies')
-        resolve(resp.data)
-      })
-      .catch((err) => {
-        reject(err)
-      })
-    })
+      await redis.del('movies')
+      return deletedMovie
+    } catch (err) {
+      return err
+    }
   }
 }
 
