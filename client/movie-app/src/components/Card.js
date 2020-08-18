@@ -1,7 +1,9 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { gql, useMutation } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { getEntertainMe } from '../pages/Home'
+import { GET_FAVORITES } from '../pages/Favorites'
+import { favoriteItems } from '../config'
 
 const DELETE_MOVIE = gql`
   mutation deleteMovie($id: ID) {
@@ -31,6 +33,7 @@ const DELETE_SERIE = gql`
 
 
 const Card = (props) => {
+  const {error, loading, data} = useQuery(GET_FAVORITES)
   const { _id, title, poster_path, popularity, tags } = props.movie == null ? props.series : props.movie
   const [deleteMovie, { }] = useMutation(DELETE_MOVIE, {
     refetchQueries: [
@@ -76,6 +79,11 @@ const Card = (props) => {
     }
   }
 
+  const onAddFavorite = () => {
+      let currentFavorites = data.favorites
+      favoriteItems(currentFavorites.concat(props.movie == null ? props.series : props.movie))
+  }
+
   return (
     <div className="col-3">
     <div className="card" style={{width: '15rem', backgroundColor:'#66ccff'}}>
@@ -85,7 +93,8 @@ const Card = (props) => {
       <p className="card-text">Genre: { tags.join(", ") }</p>
       <p className="card-text">Popularity: { popularity }</p>
       <a className="btn btn-success mr-3" style={{color:'white'}} onClick={() => onEdit(_id)}>Update</a>
-      <a className="btn btn-danger" style={{color:'white'}} onClick={() => onDelete(_id)}>Delete</a>
+      <a className="btn btn-danger mr-3" style={{color:'white'}} onClick={() => onDelete(_id)}>Delete</a>
+      <a className="btn btn-dark mt-2" style={{color:'white'}} onClick={() => onAddFavorite()}>Add Favorite</a>
       </div>
     </div>
     </div>

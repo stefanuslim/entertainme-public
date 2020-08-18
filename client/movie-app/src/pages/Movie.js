@@ -3,6 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Card from '../components/Card'
+import Loading from '../components/Loading'
 
 export const getMovies = gql `
   query {
@@ -20,7 +21,7 @@ export const getMovies = gql `
 
 const Movie = () => {
   const { error, loading, data } = useQuery(getMovies)
-  if (loading) return (<p>Loading</p>)
+  if (loading) return (<Loading />)
   if (error) return (<p>Error</p>)
   return (
     <>

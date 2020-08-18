@@ -3,6 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Loading from '../components/Loading'
 
 export const getMovieById = gql `
   query Movie($movieId: ID) {
@@ -20,7 +21,7 @@ export const getMovieById = gql `
 const DetailMovie = () => {
   const { id } = useParams()
   const { error, data, loading } = useQuery(getMovieById, {variables: {movieId: id}})
-  if (loading) return (<p>Loading</p>)
+  if (loading) return (<Loading />)
   if (error) return (<p>Error</p>)
   return (
     <>

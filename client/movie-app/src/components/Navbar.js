@@ -21,6 +21,11 @@ const Navbar = () => {
     history.push("/")
   }
 
+  const goToFavorites = (e) => {
+    e.preventDefault()
+    history.push("/favorites")
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-danger">
   <a className="navbar-brand" style={{color:'white'}}>Cinema-22</a>
@@ -38,6 +43,9 @@ const Navbar = () => {
       </li>
       <li className="nav-item">
         <a className="nav-link" href="" onClick={(e) => goToSeries(e)} style={{color:'white'}}>TV Series</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="" onClick={(e) => goToFavorites(e)} style={{color:'white'}}>Favorites</a>
       </li>
     </ul>
   </div>

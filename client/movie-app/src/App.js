@@ -5,6 +5,7 @@ import Movie from './pages/Movie'
 import Series from './pages/Series'
 import DetailMovie from './pages/DetailMovie'
 import DetailSeries from './pages/DetailSeries'
+import Favorites from './pages/Favorites'
 import FormAdd from './pages/FormAdd'
 import FormEdit from './pages/FormEdit'
 import { ApolloProvider } from '@apollo/client';
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route exact path="/movies">
             <Movie />
+          </Route>
+          <Route exact path="/favorites">
+            <Favorites />
           </Route>
           <Route path="/movie/create">
           <FormAdd />

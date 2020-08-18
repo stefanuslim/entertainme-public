@@ -3,6 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Loading from '../components/Loading'
 
 export const getSeriesById = gql `
   query Serie($seriesId: ID) {
@@ -20,7 +21,7 @@ export const getSeriesById = gql `
 const DetailSeries = () => {
   const { id } = useParams()
   const { error, data, loading } = useQuery(getSeriesById, {variables: {seriesId: id}})
-  if (loading) return (<p>Loading</p>)
+  if (loading) return (<Loading />)
   if (error) return (<p>Error</p>)
   return (
     <>

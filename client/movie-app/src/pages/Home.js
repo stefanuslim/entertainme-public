@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useQuery, gql } from '@apollo/client';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Loading from '../components/Loading'
 
 export const getEntertainMe = gql`
   query getEntertainMe {
@@ -29,7 +30,7 @@ export const getEntertainMe = gql`
 const Home = () => {
   const history = useHistory()
   const { loading, error, data } = useQuery(getEntertainMe);
-  if (loading) return (<p>Loading</p>)
+  if (loading) return (<Loading />)
   if (error) return (<p>Error</p>)
 
   const toAddMoviePage = () => {
