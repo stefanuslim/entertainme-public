@@ -39,7 +39,7 @@ const resolvers = {
       const moviesCache = await redis.get("moviesGraphql")
       if(moviesCache) return JSON.parse(moviesCache)
       try {
-        const movies = await axios.get('http://localhost:3001/movies');
+        const movies = await axios.get('http://localhost:4001/movies');
         await redis.set("moviesGraphql", JSON.stringify(movies.data))
         return movies.data;
       } catch (error) {
@@ -51,7 +51,7 @@ const resolvers = {
       if(movieCache) return JSON.parse(movieCache)
       try {
         const id = args._id
-        const movie = await axios.get(`http://localhost:3001/movies/${id}`);
+        const movie = await axios.get(`http://localhost:4001/movies/${id}`);
         await redis.set(`movieGraphql-${id}`, JSON.stringify(movie.data))
         return movie.data;
       } catch (error) {
@@ -64,7 +64,7 @@ const resolvers = {
       try {
        const newMovie = args.movie;
        await redis.del("moviesGraphql")
-       const movie = await axios.post(`http://localhost:3001/movies`, newMovie)
+       const movie = await axios.post(`http://localhost:4001/movies`, newMovie)
        return movie.data;
      } catch (error) {
        return error
@@ -76,7 +76,7 @@ const resolvers = {
       const updatedMovie = args.movie;
       await redis.del("moviesGraphql")
       await redis.del(`movieGraphql-${id}`)
-      const movie = await axios.put(`http://localhost:3001/movies/${id}`, updatedMovie);
+      const movie = await axios.put(`http://localhost:4001/movies/${id}`, updatedMovie);
       return updatedMovie;
     } catch (error) {
       return error
@@ -88,7 +88,7 @@ const resolvers = {
       const id = args._id
       await redis.del("moviesGraphql")
       await redis.del(`movieGraphql-${id}`)
-      const movie = await axios.delete(`http://localhost:3001/movies/${id}`);
+      const movie = await axios.delete(`http://localhost:4001/movies/${id}`);
       return movie.data;
     } catch (error) {
       return error

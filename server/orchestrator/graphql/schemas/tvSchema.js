@@ -39,7 +39,7 @@ const resolvers = {
       const seriesCache = await redis.get("seriesGraphql")
       if(seriesCache) return JSON.parse(seriesCache)
       try {
-        const series = await axios.get('http://localhost:3002/tv');
+        const series = await axios.get('http://localhost:4002/tv');
         await redis.set("seriesGraphql", JSON.stringify(series.data))
         return series.data;
       } catch (error) {
@@ -51,7 +51,7 @@ const resolvers = {
       if(seriesCache) return JSON.parse(seriesCache)
       try {
         const id = args._id
-        const serie = await axios.get(`http://localhost:3002/tv/${id}`);
+        const serie = await axios.get(`http://localhost:4002/tv/${id}`);
         await redis.set(`seriesGraphql-${id}`, JSON.stringify(serie.data))
         return serie.data;
       } catch (error) {
@@ -64,7 +64,7 @@ const resolvers = {
       try {
        const newSerie = args.serie;
        await redis.del("seriesGraphql")
-       const serie = await axios.post(`http://localhost:3002/tv`, newSerie)
+       const serie = await axios.post(`http://localhost:4002/tv`, newSerie)
        return serie.data;
      } catch (error) {
        return error
@@ -76,7 +76,7 @@ const resolvers = {
       const updatedSerie = args.serie;
       await redis.del("seriesGraphql")
       await redis.del(`seriesGraphql-${id}`)
-      const serie = await axios.put(`http://localhost:3002/tv/${id}`, updatedSerie);
+      const serie = await axios.put(`http://localhost:4002/tv/${id}`, updatedSerie);
       return updatedSerie;
     } catch (error) {
       return error
@@ -87,7 +87,7 @@ const resolvers = {
       const id = args._id
       await redis.del("seriesGraphql")
       await redis.del(`seriesGraphql-${id}`)
-      const serie = await axios.delete(`http://localhost:3002/tv/${id}`);
+      const serie = await axios.delete(`http://localhost:4002/tv/${id}`);
       return serie.data;
     } catch (error) {
       return error

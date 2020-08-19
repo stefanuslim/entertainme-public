@@ -116,28 +116,28 @@ const FormEdit = () => {
     <h1 style={{color:'white'}}>{
     location === 'movie' ? `Add Movie` : `Add Series`}</h1>
     <div className="container col-5" style={{textAlign:'left'}}>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Title</label>
-    <input type="text" class="form-control" placeholder="Movie Title" onChange={(e) => onChangeTitle(e)} defaultValue={data.movie == null ? data.serie.title : data.movie.title}/>
+    <input type="text" className="form-control" placeholder="Movie Title" onChange={(e) => onChangeTitle(e)} defaultValue={data.movie == null ? data.serie.title : data.movie.title}/>
   </div>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Overview</label>
-    <textarea class="form-control" rows="3" placeholder="Movie Overview" onChange={(e) => onChangeOverview(e)} defaultValue={data.movie == null ? data.serie.overview : data.movie.overview}></textarea>
+    <textarea className="form-control" rows="3" placeholder="Movie Overview" onChange={(e) => onChangeOverview(e)} defaultValue={data.movie == null ? data.serie.overview : data.movie.overview}></textarea>
   </div>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Poster_URL</label>
-    <input type="text" class="form-control" placeholder="Movie Poster URL" onChange={(e) => onChangeURL(e)} defaultValue={data.movie == null ? data.serie.poster_path : data.movie.poster_path}/>
+    <input type="text" className="form-control" placeholder="Movie Poster URL" onChange={(e) => onChangeURL(e)} defaultValue={data.movie == null ? data.serie.poster_path : data.movie.poster_path}/>
   </div>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Popularity</label>
-    <input type="number" class="form-control" placeholder="Movie Popularity" onChange={(e) => onChangePopularity(e)} defaultValue={data.movie == null ? data.serie.popularity: data.movie.popularity}/>
+    <input type="number" className="form-control" placeholder="Movie Popularity" onChange={(e) => onChangePopularity(e)} defaultValue={data.movie == null ? data.serie.popularity: data.movie.popularity}/>
   </div>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Tags</label>
-    <input type="text" class="form-control" placeholder="Movie Tags" onChange={(e) => onChangeTags(e)} defaultValue={data.movie == null ? data.serie.tags : data.movie.tags}/>
+    <input type="text" className="form-control" placeholder="Movie Tags" onChange={(e) => onChangeTags(e)} defaultValue={data.movie == null ? data.serie.tags : data.movie.tags}/>
   </div>
-  <button type="submit" class="btn btn-primary mr-2" onClick={() => onSubmitEdit(id)}>Edit</button>
-  <button type="click" class="btn btn-secondary" onClick={() => onCancelEdit()}>Cancel</button>
+  <button type="submit" className="btn btn-primary mr-2" onClick={() => onSubmitEdit(id)}>Edit</button>
+  <button type="click" className="btn btn-secondary" onClick={() => onCancelEdit()}>Cancel</button>
     </div>
     <Footer/>
     </>

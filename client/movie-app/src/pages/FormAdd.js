@@ -101,28 +101,28 @@ const FormAdd = () => {
       history.location.pathname.split("/")[1] === 'movie' ? `Add Movie` : `Add Series`
     }</h1>
     <div className="container col-5" style={{textAlign:'left'}}>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Title</label>
-    <input type="text" class="form-control" placeholder="Title" onChange={(e) => onChangeTitle(e)}/>
+    <input type="text" className="form-control" placeholder="Title" onChange={(e) => onChangeTitle(e)}/>
   </div>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Overview</label>
-    <textarea class="form-control" rows="3" placeholder="Overview" onChange={(e) => onChangeOverview(e)}></textarea>
+    <textarea className="form-control" rows="3" placeholder="Overview" onChange={(e) => onChangeOverview(e)}></textarea>
   </div>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Poster_URL</label>
-    <input type="text" class="form-control" placeholder="Poster URL" onChange={(e) => onChangeURL(e)}/>
+    <input type="text" className="form-control" placeholder="Poster URL" onChange={(e) => onChangeURL(e)}/>
   </div>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Popularity</label>
-    <input type="number" class="form-control" placeholder="Popularity" onChange={(e) => onChangePopularity(e)}/>
+    <input type="number" className="form-control" placeholder="Popularity" onChange={(e) => onChangePopularity(e)}/>
   </div>
-  <div class="form-group">
+  <div className="form-group">
     <label style={{color:'white'}}>Tags</label>
-    <input type="text" class="form-control" placeholder="Tags" onChange={(e) => onChangeTags(e)}/>
+    <input type="text" className="form-control" placeholder="Tags" onChange={(e) => onChangeTags(e)}/>
   </div>
-  <button type="submit" class="btn btn-primary mr-2" onClick={() => onSubmitAdd()}>Add</button>
-  <button type="click" class="btn btn-secondary" onClick={() => onCancelAdd()}>Cancel</button>
+  <button type="submit" className="btn btn-primary mr-2" onClick={() => onSubmitAdd()}>Add</button>
+  <button type="click" className="btn btn-secondary" onClick={() => onCancelAdd()}>Cancel</button>
     </div>
     <Footer/>
     </>
